@@ -52,7 +52,7 @@ function load($path, $parent=NULL) {
 		if(is_dir($path . "/" . $item)) {
 			load($path . "/" . $item, $root);
 		}
-		elseif(substr($item, strpos(strtolower($item), ".")) == ".php") {
+		elseif(substr($item, strrpos(strtolower($item), ".")) == ".php") {
 			$model->append($root, array($item, $path . "/" . $item, FALSE));
 		}
 	}
@@ -100,7 +100,7 @@ function process($iter) {
 	$file = $model->get_value($iter, 0);
 	$checked = $model->get_value($iter, 2);	
 	if ($checked) {
-		if(substr($file, strpos(strtolower($file), ".")) == ".php") {
+		if(substr($file, strrpos(strtolower($file), ".")) == ".php") {
 			$filelist[] = $fullpath;
 		}
 	}
@@ -168,6 +168,7 @@ function check($iter, $check_value) {
 
 // Cria a janela
 $window = new GtkWindow();
+$window->set_title("PHP-GTK Obfuscator GUI");
 $window->set_size_request(500, 700);
 $window->add($vbox);
 
